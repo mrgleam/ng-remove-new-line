@@ -509,6 +509,12 @@
 <div>
   <label for="name">Name: </label>
 </div>
-<textarea id="name" rows="3" [formControl]="name"></textarea>
+<textarea id="name" rows="3" [formControl]="name" libRemoveNewLine></textarea>
 
+<div>
+  <label for="name">Email: </label>
+</div>
+<div>
+  <input type="text" [formControl]="email">
+</div>
 <router-outlet></router-outlet>
