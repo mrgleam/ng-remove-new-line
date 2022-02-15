@@ -8,7 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   title = 'remove-new-line-app';
-  name = new FormControl('', Validators.email);
+  name = new FormControl('', Validators.required);
   email = new FormControl('', Validators.email)
   constructor() {
     this.name.setValue('test');

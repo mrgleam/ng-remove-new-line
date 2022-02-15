@@ -2,7 +2,7 @@ import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@ang
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
-  selector: '[libRemoveNewLine]',
+  selector: '[removeNewLine]',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

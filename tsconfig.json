@@ -15,9 +15,9 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "ng2-remove-new-line": [
-        "dist/ng2-remove-new-line/ng2-remove-new-line",
-        "dist/ng2-remove-new-line"
+      "ngx-remove-new-line": [
+        "dist/ngx-remove-new-line/ngx-remove-new-line",
+        "dist/ngx-remove-new-line"
       ]
     },
     "target": "es2017",

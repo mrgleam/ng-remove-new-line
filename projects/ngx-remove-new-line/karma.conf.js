@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/ng2-remove-new-line'),
+      dir: require('path').join(__dirname, '../../coverage/ngx-remove-new-line'),
       subdir: '.',
       reporters: [
         { type: 'html' },
