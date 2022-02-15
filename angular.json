@@ -3,5 +3,140 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "remove-new-line": {
+      "projectType": "library",
+      "root": "projects/remove-new-line",
+      "sourceRoot": "projects/remove-new-line/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/remove-new-line/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/remove-new-line/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/remove-new-line/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/remove-new-line/src/test.ts",
+            "tsConfig": "projects/remove-new-line/tsconfig.spec.json",
+            "karmaConfig": "projects/remove-new-line/karma.conf.js"
+          }
+        }
+      }
+    },
+    "remove-new-line-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/remove-new-line-app",
+      "sourceRoot": "projects/remove-new-line-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/remove-new-line-app",
+            "index": "projects/remove-new-line-app/src/index.html",
+            "main": "projects/remove-new-line-app/src/main.ts",
+            "polyfills": "projects/remove-new-line-app/src/polyfills.ts",
+            "tsConfig": "projects/remove-new-line-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/remove-new-line-app/src/favicon.ico",
+              "projects/remove-new-line-app/src/assets"
+            ],
+            "styles": [
+              "projects/remove-new-line-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/remove-new-line-app/src/environments/environment.ts",
+                  "with": "projects/remove-new-line-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "remove-new-line-app:build:production"
+            },
+            "development": {
+              "browserTarget": "remove-new-line-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "remove-new-line-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/remove-new-line-app/src/test.ts",
+            "polyfills": "projects/remove-new-line-app/src/polyfills.ts",
+            "tsConfig": "projects/remove-new-line-app/tsconfig.spec.json",
+            "karmaConfig": "projects/remove-new-line-app/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/remove-new-line-app/src/favicon.ico",
+              "projects/remove-new-line-app/src/assets"
+            ],
+            "styles": [
+              "projects/remove-new-line-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "remove-new-line"
 }
