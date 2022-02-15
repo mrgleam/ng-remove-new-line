@@ -7,7 +7,7 @@
     "build": "ng build --project=ngx-remove-new-line",
     "watch": "ng build --project=ngx-remove-new-line --watch --configuration development",
     "test": "ng test --project=ngx-remove-new-line",
-    "build-demo:ci": "ng build --project=remove-new-line-app",
+    "build-demo:ci": "ng build --project=remove-new-line-app --deploy-url /ngx-remove-new-line/",
     "test-demo:ci": "ng test --project=remove-new-line-app --watch=false --code-coverage --source-map true --browsers=ChromeHeadless"
   },
   "private": true,
