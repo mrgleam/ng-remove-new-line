@@ -33,16 +33,17 @@ export class RemoveNewLineDirective implements ControlValueAccessor {
   }
 
   @HostListener('blur', ['$event.target.value'])
-  onBlur(value: string) {
-    this.onChangeFn(value);
+  onBlur(value: string) { 
+    this.onChangeFn(value.replace(/(?:\r\n|\r|\n)/g,' '));
     this.onTouchedFn();
   }
 
   @HostListener('paste', ['$event'])
   onPaste(event: ClipboardEvent) {
     const clipboardData: DataTransfer | null = event.clipboardData;
-    const pastedDate = clipboardData?.getData('Text');
-    this.onChangeFn(pastedDate?.replace(/(?:\r\n|\r|\n)/g,' '));
+    const pastedDate: string | undefined = clipboardData?.getData('Text');
+    const current = this.elm.nativeElement.value;
+    this.onChangeFn(current?.concat(pastedDate)?.replace(/(?:\r\n|\r|\n)/g,' '));
   }
 
   writeValue(value: string): void {
