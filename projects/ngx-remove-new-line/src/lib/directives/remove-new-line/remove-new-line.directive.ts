@@ -1,28 +1,13 @@
-import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Directive, HostListener } from '@angular/core';
+import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: '[removeNewLine]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RemoveNewLineDirective),
-      multi: true
-    }
-  ],
+  selector: '[removeNewLine]'
 })
-export class RemoveNewLineDirective implements ControlValueAccessor {
-  private isDisabled = false;
-
-  onChangeFn: (value: any) => void = () => {
-  };
-
-  onTouchedFn = () => {
-  };
+export class RemoveNewLineDirective {
 
   constructor(
-    private elm: ElementRef,
-    private renderer: Renderer2
+    private control: NgControl
   ) { }
 
   @HostListener('keydown', ['$event'])
@@ -32,38 +17,8 @@ export class RemoveNewLineDirective implements ControlValueAccessor {
     }
   }
 
-  @HostListener('blur', ['$event.target.value'])
-  onBlur(value: string) { 
-    this.onChangeFn(value.replace(/(?:\r\n|\r|\n)/g,' '));
-    this.onTouchedFn();
-  }
-
-  @HostListener('paste', ['$event'])
-  onPaste(event: ClipboardEvent) {
-    const clipboardData: DataTransfer | null = event.clipboardData;
-    const pastedDate: string | undefined = clipboardData?.getData('Text');
-    const current = this.elm.nativeElement.value;
-    this.onChangeFn(current?.concat(pastedDate)?.replace(/(?:\r\n|\r|\n)/g,' '));
-  }
-
-  writeValue(value: string): void {
-    this.elm.nativeElement.value = value;
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChangeFn = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouchedFn = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
-    if (this.isDisabled) {
-      this.renderer.setProperty(this.elm.nativeElement, 'disabled', 'disabled');
-    } else {
-      this.renderer.removeAttribute(this.elm.nativeElement, 'disabled');
-    }
+  @HostListener('input', ['$event']) 
+  onInputChange() {
+    this.control.control?.setValue(this.control.control?.value.replace(/(?:\r\n|\r|\n)/g,' '));
   }
 }
